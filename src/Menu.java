@@ -1,6 +1,3 @@
-import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Menu {
@@ -49,9 +46,6 @@ public class Menu {
             System.out.println("5. Custom Flag Normal");
             System.out.println("6. Generate Random 30 visits");
             System.out.println("7. Exit");
-
-
-            Scanner input = new Scanner(System.in);
 
             int choice = InputValid.checkRange(1, 7);
 

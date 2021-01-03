@@ -28,7 +28,8 @@ public class FlagSystem {
             LocalDateTime VisitDT = v.getDt();
             if((VisitDT.isBefore(CaseDT) && VisitDT.isAfter(BfCaseDT))
                     || (VisitDT.isAfter(CaseDT) && VisitDT.isBefore(AfCaseDT))) {
-                Customer.custs.get(visitCustID - 1).setStatus("Close");
+                if (Customer.custs.get(visitCustID - 1).getStatus().equals("Normal"))
+                    Customer.custs.get(visitCustID - 1).setStatus("Close");
             }
         }
 
