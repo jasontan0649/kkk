@@ -34,6 +34,7 @@ public class Initializer {
     }
 
     public static void preVisit() {
+        Visit.visits.clear();
         LocalDateTime[] randomDTs = timeGene();
         final Random random = new Random();
         int CustAmt = Customer.custs.size();

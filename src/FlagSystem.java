@@ -1,7 +1,41 @@
 import java.security.PolicySpi;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class FlagSystem {
+
+    public static void flagPatient(int choice) {
+        Visit chosen = Visit.visits.get(choice - 1);
+
+        int shopID = chosen.getShopID();
+        int custID = chosen.getCustID();
+        LocalDateTime CaseDT = chosen.getDt();
+        LocalDateTime BfCaseDT = CaseDT.minusHours(1);
+        LocalDateTime AfCaseDT = CaseDT.plusHours(1);
+
+        Shop.shops.get(shopID - 1).setStatus("Case");
+        Shop.Serialize();
+
+        ArrayList<Visit> tmp = new ArrayList<Visit>();
+        for (Visit v : Visit.visits)
+            if (v.getShopID() == shopID)
+                tmp.add(v);
+
+
+        for (Visit v :tmp) {
+            int visitCustID = v.getCustID();
+            LocalDateTime VisitDT = v.getDt();
+            if((VisitDT.isBefore(CaseDT) && VisitDT.isAfter(BfCaseDT))
+                    || (VisitDT.isAfter(CaseDT) && VisitDT.isBefore(AfCaseDT))) {
+                Customer.custs.get(visitCustID - 1).setStatus("Close");
+            }
+        }
+
+        Customer.custs.get(custID - 1).setStatus("Case");
+        Customer.Serialize();
+    }
+
 
     public static void customFlagNormal(int role){
         if(role == 1)

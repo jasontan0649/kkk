@@ -18,7 +18,6 @@ public class Visit implements Serializable {
 
     private static void Serialize() {
         try {
-            System.out.println("Test");
             FileOutputStream fos = new FileOutputStream(FILE_PATH);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(visits);

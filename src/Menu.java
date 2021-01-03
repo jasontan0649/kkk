@@ -1,3 +1,6 @@
+import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Menu {
@@ -94,10 +97,15 @@ public class Menu {
     }
 
     public static void flagPatient(){
-        while(true) {
-            System.out.println("Please pick a patient");
-            new CustReport().display();
-            System.out.println("");
+        new VisitReport().display();
+        while(true){
+            System.out.println("Choose from visit history to be flagged:");
+            System.out.println("(Please input one by one && input -1 to stop)");
+            int choice = InputValid.checkRange(-1,Visit.visits.size());
+            if(choice == -1)
+                return;
+            else
+                FlagSystem.flagPatient(choice);
         }
     }
 
@@ -114,12 +122,7 @@ public class Menu {
             FlagSystem.customFlagNormal(role);
 
             viewCustStatus();
-            System.out.println("\nPress 1 to continue");
-            int glitch = InputValid.checkRange(1,1);
-
             viewShopStatus();
-            System.out.println("\nPress 1 to continue");
-            glitch = InputValid.checkRange(1,1);
         }
     }
 
