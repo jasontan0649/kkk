@@ -45,6 +45,15 @@ public class Initializer {
             Shop randomShop = Shop.shops.get(random.nextInt(ShopAmt));
             new Visit(randomDTs[i], randomCust.getId(), randomShop.getId());
         }
+
+        for (Customer c : Customer.custs)
+            c.setStatus("Normal");
+        Customer.Serialize();
+
+        for (Shop s : Shop.shops)
+            s.setStatus("Normal");
+        Shop.Serialize();
+
     }
 
     public static LocalDateTime[] timeGene() {
